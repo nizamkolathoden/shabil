@@ -1,0 +1,80 @@
+<%- include('partials/header') %>
+    <div class="test"><a class="btn" href="/admin/testimonialsetiing">Testimonial</a></div>
+    <div class="form-container">
+        <h2>Add Post</h2>
+        <form action="/admin" method="post">
+            <input type="text" required name="description" placeholder="Description" autocomplete="off">
+            <input type="text" required name="imgUrl" placeholder="Image Url" autocomplete="off">
+            <select name="category" value="category" class="category">
+                <option class="option">Select Category</option>
+                <option class="option" value="editorial">Editorial</option>
+                <option class="option" value="commercial">commercial</option>
+                <option class="option" value="fineart">Fine Art</option>
+                <option class="option" value="beforeAndafter">Before & After</option>
+            </select>
+            <button class="add-btn" type="submit">Submit</button>
+        </form>
+
+
+
+
+        <div class="posts-items">
+            <h2>Delete Post</h2>
+            <form ">
+                <% post.forEach((post)=> { %>
+                    <div class=" post-item">
+                <img class="post-item-img" src=<%=post.imgUrl%> alt="" srcset="">
+                <div class="post-item-description">
+                    <p>
+                        <%=post.description%>
+                    </p>
+                    <p>
+                        <%=post.category%>
+                    </p>
+                </div>
+                <input type="hidden" name="id" id="f" value=<%=post._id%> ></input>
+                <button onclick="myFunction()" class="delete"><i class="bi bi-trash"></i></button>
+        </div>
+        <% }) %>
+            </form>
+    </div>
+    </div>
+
+    <script>
+
+        async function myFunction() {
+
+            const id = document.getElementById("f").value
+            
+            let response = await fetch('/admin', {
+
+                method: 'Delete',
+                headers: {
+                    "Content-Type": 'Application/json'
+                },
+                body:JSON.stringify({
+                    id
+                })
+            });
+            let data = await response.json();
+            alert(data.error)
+
+
+
+            alert("hello")
+
+        }
+
+        // const trashcan = document.querySelector('.delete');
+        // trashcan.addEventListener('click', (e) => {
+        //     fetch('https://jsonplaceholder.typicode.com/posts/1', {
+        //         method: 'DELETE',
+        //         headers:{
+        //             "Content-Type":'Application/json'
+        //         }
+        //     }).then(response => {
+        //         return response.json()
+        //     })
+        // })
+    </script>
+    <%- include('partials/footer'); %>
