@@ -33,7 +33,7 @@
                     </p>
                 </div>
                 <input type="hidden" name="id" id="f" value=<%=post._id%> ></input>
-                <button onclick="myFunction()" class="delete"><i class="bi bi-trash"></i></button>
+                <button onclick="myFunction(`<%=post._id%>`)" class="delete"><i class="bi bi-trash"></i></button>
         </div>
         <% }) %>
             </form>
@@ -42,9 +42,9 @@
 
     <script>
 
-        async function myFunction() {
+        async function myFunction(id) {
 
-            const id = document.getElementById("f").value
+   
             
             let response = await fetch('/admin', {
 
@@ -61,7 +61,7 @@
 
 
 
-            alert("hello")
+        
 
         }
 
